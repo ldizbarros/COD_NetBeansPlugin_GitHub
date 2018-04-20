@@ -3,6 +3,7 @@ package lau.miproject.githubrepo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import org.kohsuke.github.GHCreateRepositoryBuilder;
 import org.kohsuke.github.GitHub;
 import org.openide.awt.ActionID;
@@ -27,9 +28,9 @@ public final class GitHubActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         GitHub github;
         try {
-            github = GitHub.connect();
+            github = GitHub.connectUsingPassword(JOptionPane.showInputDialog("Introduce el usuario de GitHub"),JOptionPane.showInputDialog("Introduce la contraseña"));
             GHCreateRepositoryBuilder builder;
-            builder = github.createRepository("reepo");
+            builder = github.createRepository(JOptionPane.showInputDialog("Introduce el nombre del nuevo repositorio"));
             builder.create();
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
